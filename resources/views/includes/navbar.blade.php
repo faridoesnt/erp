@@ -9,8 +9,13 @@
         <div class="collapse navbar-collapse" id="navbarResponsive">
             <ul class="navbar-nav mx-auto">
                 <li class="nav-item">
-                    <a href="" class="nav-link">Home</a>
+                    <a href="{{ route('app') }}" class="nav-link">Home</a>
                 </li>
+                @if (Gate::check('karyawan') || Gate::check('manager') || Gate::check('supervisor'))
+                    <li class="nav-item">
+                        <a href="{{ route('account') }}" class="nav-link">Profile</a>
+                    </li>
+                @endif
             </ul>
 
             <ul class="navbar-nav d-none d-lg-flex">

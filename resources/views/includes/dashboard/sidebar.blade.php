@@ -45,31 +45,15 @@
             </p>
           </a>
         </li>
+        <li class="nav-header">Attendance</li>
         <li class="nav-item">
-          <a href="" class="nav-link {{ (request()->is('dashboard/peminjaman')) ? 'active' : '' }}">
+          <a href="" class="nav-link">
             <i class="nav-icon fas fa-solid fa-arrow-right"></i>
             <p>
-              Absensi
+              Attendace
             </p>
           </a>
         </li>
-        {{-- <li class="nav-header">Organization</li>
-        <li class="nav-item">
-          <a href="{{ route('organization-supervisor-manager.index') }}" class="nav-link {{ (request()->is('dashboard/organization-supervisor-manager*')) ? 'active' : '' }}">
-            <i class="nav-icon fas fa-solid fa-user"></i>
-            <p>
-              Supervisor - Manager
-            </p>
-          </a>
-        </li>
-        <li class="nav-item">
-          <a href="{{ route('organization-manager-karyawan.index') }}" class="nav-link {{ (request()->is('dashboard/organization-manager-karyawan*')) ? 'active' : '' }}">
-            <i class="nav-icon fas fa-users"></i>
-            <p>
-              Manager - Karyawan
-            </p>
-          </a>
-        </li> --}}
         <li class="nav-header">SETTINGS</li>
         <li class="nav-item">
           <a href="{{ route('logout') }}"

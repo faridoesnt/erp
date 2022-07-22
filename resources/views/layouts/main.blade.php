@@ -15,16 +15,8 @@
     <!--  Navbar -->
     @include('includes.navbar')
 
-    <div class="col-12">
-        <div class="row">
-            <!-- Sidebar -->
-            @include('includes.sidebar')
-            <div class="col-9 offset-2" style="margin-top: 70px;">
-                <!-- Page Content -->
-                @yield('content')
-            </div>
-        </div>
-    </div>
+    <!-- Page Content -->
+    @yield('content')
 
     <!-- Script -->
     @stack('prepend-script')

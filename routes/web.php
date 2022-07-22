@@ -20,14 +20,11 @@ use App\Http\Controllers\SupervisorManagerController;
 | contains the "web" middleware group. Now create something great!
 |
 */
+
 route::get('/', [AppController::class, 'index'])->middleware('auth')->name('app');
-
-Route::prefix('app')
-        ->middleware('auth')
-        ->group(function() {
-
-            route::get('/account', [AppController::class, 'my_account'])->name('account');
-        });
+route::get('/account', [AppController::class, 'my_account'])->middleware('auth')->name('account');
+route::post('/check-in', [AppController::class, 'check_in'])->middleware('auth')->name('checkIn');
+route::post('/check-out', [AppController::class, 'check_out'])->middleware('auth')->name('checkOut');
 
 Route::prefix('dashboard')
         ->middleware('hr')

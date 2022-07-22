@@ -5,28 +5,3 @@
 .page-register {
     margin-top: 100px;
 }
-
-.sidenav {
-    height: 100%;
-    width: 220px;
-    position: fixed;
-    top: 0;
-    left: 0;
-    box-shadow: 1px 0 5px -2px #bbb;
-    overflow-x: hidden;
-}
-
-.sidenav .sidelink a {
-    color: black;
-    text-decoration: none;
-}
-
-.sidenav .sidelink a:hover {
-    color: red;
-    text-decoration: none;
-}
-
-.sidenav .sidelink a:active {
-    color: green;
-    text-decoration: none;
-}
