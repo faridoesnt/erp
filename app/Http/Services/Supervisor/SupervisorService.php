@@ -18,6 +18,11 @@ class SupervisorService
         return $this->supervisorRepository->getAll();
     }
 
+    public function getCreateEdit()
+    {
+        return $this->supervisorRepository->getCreateEdit();
+    }
+
     public function saveData($request)
     {
         return $this->supervisorRepository->save($request);

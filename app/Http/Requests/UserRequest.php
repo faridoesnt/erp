@@ -2,6 +2,7 @@
 
 namespace App\Http\Requests;
 
+use Illuminate\Validation\Rule;
 use Illuminate\Foundation\Http\FormRequest;
 
 class UserRequest extends FormRequest
@@ -23,11 +24,23 @@ class UserRequest extends FormRequest
      */
     public function rules()
     {
-        return [
-            'name'      => 'required|min:3',
-            'email'     => 'required|email:dns|unique:users',
-            'password'  => 'required|min:8|confirmed',
-            'roles'     => 'required',
-        ];
+        if($this->getMethod() == "PUT")
+        {
+            $rules =  [
+                'name'      => "required|min:3",
+                'email'     => "required|email:dns", Rule::unique('users')->ignore($this->user),
+            ];
+        }
+        elseif($this->getMethod() == "POST")
+        {
+            $rules = [
+                'name'      => 'required|min:3',
+                'email'     => 'required|email:dns|unique:users',
+                'password'  => 'required|min:8|confirmed',
+                'roles'     => 'required',
+            ];
+        }
+
+        return $rules;
     }
 }

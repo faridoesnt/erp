@@ -46,6 +46,12 @@ Route::prefix('dashboard')
             route::get('/karyawan/hierarchy/edit/{id}', [KaryawanController::class, 'h_edit'])->name('h_karyawan.edit');
             route::put('/karyawan/hierarchy/update/{id}', [KaryawanController::class, 'h_update'])->name('h_karyawan.update');
             route::delete('/karyawan/hierarchy/destroy/{id}', [KaryawanController::class, 'h_destroy'])->name('h_karyawan.destroy');
+
+            route::get('/manager/hierarchy/create', [ManagerController::class, 'h_create'])->name('h_manager.create');
+            route::post('/manager/hierarchy/store', [ManagerController::class, 'h_store'])->name('h_manager.store');
+            route::get('/manager/hierarchy/edit/{id}', [ManagerController::class, 'h_edit'])->name('h_manager.edit');
+            route::put('/manager/hierarchy/update/{id}', [ManagerController::class, 'h_update'])->name('h_manager.update');
+            route::delete('/manager/hierarchy/destroy/{id}', [ManagerController::class, 'h_destroy'])->name('h_manager.destroy');
                         
         });
         

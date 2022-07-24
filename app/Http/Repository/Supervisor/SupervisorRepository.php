@@ -21,6 +21,11 @@ class SupervisorRepository implements SupervisorRepositoryInterface
         return $this->user->where('roles', 'Supervisor')->paginate(10);
     }
 
+    public function getCreateEdit()
+    {
+        return $this->user->where('roles', 'Supervisor')->get();
+    }
+
     public function getID()
     {
         return $this->user->where('roles', 'Supervisor')->where('id', Auth::user()->id)->first();

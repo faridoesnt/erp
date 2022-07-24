@@ -36,46 +36,97 @@
                         </button>
                     </div>
                 @endif
-                <div class="card">
-                    <div class="card-header">
-                        <a href="{{ route('manager.create') }}" class="btn btn-success">Create Manager</a>
-                    </div>
-                    <div class="card-body">
-                        <div class="table-responsive">
-                            <table class="table">
-                                <thead>
-                                    <tr>
-                                        <td>No</td>
-                                        <td>Nama</td>
-                                        <td>Email</td>
-                                        <td style="width: 20%;">Aksi</td>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    @forelse ($manager as $item)
-                                        <tr>
-                                            <td>{{ $loop->iteration }}</td>
-                                            <td>{{ $item->name }}</td>
-                                            <td>{{ $item->email }}</td>
-                                            <td>
-                                                <a href="{{ route('manager.edit', $item->id) }}" class="btn btn-primary mb-1">Edit</a>
-                                                <form action="{{ route('manager.destroy', $item->id) }}'" method="POST">
-                                                    @method('DELETE')
-                                                    @csrf
-                                                    <button type="submit" class="btn btn-danger">
-                                                        Delete
-                                                    </button>
-                                                </form>
-                                            </td>
-                                        </tr>
-                                    @empty
-                                        <tr>
-                                            <td colspan="4">No Data.</td>
-                                        </tr>
-                                    @endforelse
-                                </tbody>
-                            </table>
-                            {{ $manager->links() }}
+                <div class="col-12">
+                    <div class="row">
+                        <div class="col-6">
+                            <div class="card">
+                                <div class="card-header">
+                                    <a href="{{ route('manager.create') }}" class="btn btn-success">Create Manager</a>
+                                </div>
+                                <div class="card-body">
+                                    <div class="table-responsive">
+                                        <table class="table">
+                                            <thead>
+                                                <tr>
+                                                    <td>No</td>
+                                                    <td>Nama</td>
+                                                    <td>Email</td>
+                                                    <td style="width: 20%;">Aksi</td>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                @forelse ($manager as $item)
+                                                    <tr>
+                                                        <td>{{ $loop->iteration }}</td>
+                                                        <td>{{ $item->name }}</td>
+                                                        <td>{{ $item->email }}</td>
+                                                        <td>
+                                                            <a href="{{ route('manager.edit', $item->id) }}" class="btn btn-primary mb-1">Edit</a>
+                                                            <form action="{{ route('manager.destroy', $item->id) }}'" method="POST">
+                                                                @method('DELETE')
+                                                                @csrf
+                                                                <button type="submit" class="btn btn-danger">
+                                                                    Delete
+                                                                </button>
+                                                            </form>
+                                                        </td>
+                                                    </tr>
+                                                @empty
+                                                    <tr>
+                                                        <td colspan="4">No Data.</td>
+                                                    </tr>
+                                                @endforelse
+                                            </tbody>
+                                        </table>
+                                        {{ $manager->appends(['h_manager' => $h_manager->currentPage()])->links() }}
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-6">
+                            <div class="card">
+                                <div class="card-header">
+                                    <a href="{{ route('h_manager.create') }}" class="btn btn-success">Create Hierarchy</a>
+                                </div>
+                                <div class="card-body">
+                                    <div class="table-responsive">
+                                        <table class="table">
+                                            <thead>
+                                                <tr>
+                                                    <td>No</td>
+                                                    <td>Manager</td>
+                                                    <td>Supervisor</td>
+                                                    <td style="width: 20%;">Aksi</td>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                @forelse ($h_manager as $item)
+                                                    <tr>
+                                                        <td>{{ $loop->iteration }}</td>
+                                                        <td>{{ $item->manager->name ?? '-' }}</td>
+                                                        <td>{{ $item->supervisor->name ?? '-' }}</td>
+                                                        <td>
+                                                            <a href="{{ route('h_manager.edit', $item->id) }}" class="btn btn-primary mb-1">Edit</a>
+                                                            <form action="{{ route('h_manager.destroy', $item->id) }}'" method="POST">
+                                                                @method('DELETE')
+                                                                @csrf
+                                                                <button type="submit" class="btn btn-danger">
+                                                                    Delete
+                                                                </button>
+                                                            </form>
+                                                        </td>
+                                                    </tr>
+                                                @empty
+                                                    <tr>
+                                                        <td colspan="4">No Data.</td>
+                                                    </tr>
+                                                @endforelse
+                                            </tbody>
+                                        </table>
+                                        {{ $h_manager->appends(['manager' => $manager->currentPage()])->links() }}
+                                    </div>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>

@@ -41,7 +41,7 @@ class KaryawanController extends Controller
     public function h_create()
     {
         $karyawan = $this->karyawanService->getCreateEdit();
-        $manager = $this->managerService->getAll();
+        $manager = $this->managerService->getCreateEdit();
 
         return view('pages.dashboard.karyawan.hierarchy.create', [
             'karyawan' => $karyawan,
