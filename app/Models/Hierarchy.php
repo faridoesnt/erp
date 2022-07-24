@@ -5,7 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class HierarchyKaryawan extends Model
+class Hierarchy extends Model
 {
     use HasFactory;
 
@@ -21,5 +21,10 @@ class HierarchyKaryawan extends Model
     public function manager()
     {
         return $this->belongsTo(User::class, 'manager_id', 'id');
+    }
+
+    public function supervisor()
+    {
+        return $this->belongsTo(User::class, 'supervisor_id', 'id');
     }
 }

@@ -53,23 +53,6 @@
             </p>
           </a>
         </li>
-        <li class="nav-header">HIERARCHY</li>
-        <li class="nav-item">
-          <a href="" class="nav-link">
-            <i class="nav-icon fas fa-solid fa-book"></i>
-            <p>
-              Manager - Supervisor
-            </p>
-          </a>
-        </li>
-        <li class="nav-item">
-          <a href="{{ route('hierarchy_karyawan.index') }}" class="nav-link {{ (request()->is('dashboard/hierarchy_karyawan*')) ? 'active' : '' }}">
-            <i class="nav-icon fas fa-users"></i>
-            <p>
-              Karyawan - Manager
-            </p>
-          </a>
-        </li>
         <li class="nav-header">SETTINGS</li>
         <li class="nav-item">
           <a href="{{ route('logout') }}"

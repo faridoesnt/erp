@@ -45,13 +45,19 @@ class User extends Authenticatable
 
     public function karyawan()
     {
-        return $this->hasMany(HierarchyKaryawan::class, 'karyawan_id', 'id')
+        return $this->hasMany(Hierarchy::class, 'karyawan_id', 'id')
                     ->where('roles', 'Karyawan');
     }
     
     public function manager()
     {
-        return $this->hasMany(HierarchyKaryawan::class, 'manager_id', 'id')
+        return $this->hasMany(Hierarchy::class, 'manager_id', 'id')
                     ->where('roles', 'Manager');;
+    }
+
+    public function supervisor()
+    {
+        return $this->hasMany(Hierarchy::class, 'supervisor_id', 'id')
+                    ->where('roles', 'Supervisor');
     }
 }

@@ -3,6 +3,7 @@
 namespace App\Http\Repository\Manager;
 
 use App\Models\User;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use App\Http\Repository\Manager\ManagerRepositoryInterface;
 
@@ -18,6 +19,11 @@ class ManagerRepository implements ManagerRepositoryInterface
     public function getAll()
     {
         return $this->user->where('roles', 'Manager')->paginate(10);
+    }
+
+    public function getID()
+    {
+        return $this->user->where('roles', 'Manager')->where('id', Auth::user()->id)->first();
     }
 
     public function save($data)

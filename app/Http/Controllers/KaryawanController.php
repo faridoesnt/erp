@@ -2,31 +2,51 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Requests\UserRequest;
 use Throwable;
+use Illuminate\Http\Request;
+use App\Http\Requests\UserRequest;
 use App\Http\Services\Karyawan\KaryawanService;
+use App\Http\Services\Karyawan\H_KaryawanService;
+use App\Http\Services\Manager\ManagerService;
 
 class KaryawanController extends Controller
 {
     protected $karyawanService;
+    protected $h_karyawanService;
+    protected $managerService;
 
-    public function __construct(KaryawanService $karyawanService)
+    public function __construct(KaryawanService $karyawanService, H_KaryawanService $h_karyawanService, ManagerService $managerService)
     {
         $this->karyawanService = $karyawanService;
+        $this->h_karyawanService = $h_karyawanService;
+        $this->managerService = $managerService;
     }
 
     public function index()
     {
+        $h_karyawan = $this->h_karyawanService->getAll();
         $karyawan = $this->karyawanService->getAll();
 
         return view('pages.dashboard.karyawan.index', [
-            'karyawan' => $karyawan
+            'karyawan' => $karyawan,
+            'h_karyawan' => $h_karyawan,
         ]);
     }
 
     public function create()
     {
         return view('pages.dashboard.karyawan.create');
+    }
+
+    public function h_create()
+    {
+        $karyawan = $this->karyawanService->getAll();
+        $manager = $this->managerService->getAll();
+
+        return view('pages.dashboard.karyawan.hierarchy.create', [
+            'karyawan' => $karyawan,
+            'manager' => $manager,
+        ]);
     }
 
     public function store(UserRequest $request)
@@ -38,6 +58,20 @@ class KaryawanController extends Controller
             return redirect()->route('karyawan.index')->with('success', 'Successfully Add New Data');
         }
         catch (Throwable $e)
+        {
+            return $e->getMessage();
+        }
+    }
+
+    public function h_store(Request $request)
+    {
+        try
+        {
+            $this->h_karyawanService->saveData($request);
+
+            return redirect()->route('karyawan.index')->with('success', 'Successfully Add New Data');
+        }
+        catch(Throwable $e)
         {
             return $e->getMessage();
         }

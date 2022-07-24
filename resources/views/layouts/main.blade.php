@@ -19,7 +19,7 @@
         <div class="row">
             <!-- Sidebar -->
             @include('includes.sidebar')
-            <div class="col-9 offset-3" style="margin-top: 70px;">
+            <div class="col-9 offset-2" style="margin-top: 70px;">
                 <!-- Page Content -->
                 @yield('content')
             </div>

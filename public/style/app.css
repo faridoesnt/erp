@@ -8,11 +8,25 @@
 
 .sidenav {
     height: 100%;
-    width: 340px;
+    width: 220px;
     position: fixed;
     top: 0;
     left: 0;
-    padding-left: 30px;
     box-shadow: 1px 0 5px -2px #bbb;
     overflow-x: hidden;
+}
+
+.sidenav .sidelink a {
+    color: black;
+    text-decoration: none;
+}
+
+.sidenav .sidelink a:hover {
+    color: red;
+    text-decoration: none;
+}
+
+.sidenav .sidelink a:active {
+    color: green;
+    text-decoration: none;
 }

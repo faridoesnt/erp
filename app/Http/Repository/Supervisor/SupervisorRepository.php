@@ -3,6 +3,7 @@
 namespace App\Http\Repository\Supervisor;
 
 use App\Models\User;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use App\Http\Repository\Supervisor\SupervisorRepositoryInterface;
 
@@ -18,6 +19,11 @@ class SupervisorRepository implements SupervisorRepositoryInterface
     public function getAll()
     {
         return $this->user->where('roles', 'Supervisor')->paginate(10);
+    }
+
+    public function getID()
+    {
+        return $this->user->where('roles', 'Supervisor')->where('id', Auth::user()->id)->first();
     }
 
     public function save($data)

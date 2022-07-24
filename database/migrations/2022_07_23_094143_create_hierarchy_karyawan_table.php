@@ -15,8 +15,9 @@ class CreateHierarchyKaryawanTable extends Migration
     {
         Schema::create('hierarchy_karyawan', function (Blueprint $table) {
             $table->id();
-            $table->integer('karyawan_id');
-            $table->integer('manager_id');
+            $table->integer('karyawan_id')->nullable();
+            $table->integer('manager_id')->nullable();
+            $table->integer('supervisor_id')->nullable();
             $table->timestamps();
         });
     }

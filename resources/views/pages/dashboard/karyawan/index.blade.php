@@ -36,46 +36,97 @@
                         </button>
                     </div>
                 @endif
-                <div class="card">
-                    <div class="card-header">
-                        <a href="{{ route('karyawan.create') }}" class="btn btn-success">Create Karyawan</a>
-                    </div>
-                    <div class="card-body">
-                        <div class="table-responsive">
-                            <table class="table">
-                                <thead>
-                                    <tr>
-                                        <td>No</td>
-                                        <td>Nama</td>
-                                        <td>Email</td>
-                                        <td style="width: 20%;">Aksi</td>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    @forelse ($karyawan as $item)
-                                        <tr>
-                                            <td>{{ $loop->iteration }}</td>
-                                            <td>{{ $item->name }}</td>
-                                            <td>{{ $item->email }}</td>
-                                            <td>
-                                                <a href="{{ route('karyawan.edit', $item->id) }}" class="btn btn-primary mb-1">Edit</a>
-                                                <form action="{{ route('karyawan.destroy', $item->id) }}'" method="POST">
-                                                    @method('DELETE')
-                                                    @csrf
-                                                    <button type="submit" class="btn btn-danger">
-                                                        Delete
-                                                    </button>
-                                                </form>
-                                            </td>
-                                        </tr>
-                                    @empty
-                                        <tr>
-                                            <td colspan="4">No Data.</td>
-                                        </tr>
-                                    @endforelse
-                                </tbody>
-                            </table>
-                            {{ $karyawan->links() }}
+                <div class="col-12">
+                    <div class="row">
+                        <div class="col-6">
+                            <div class="card">
+                                <div class="card-header">
+                                    <a href="{{ route('karyawan.create') }}" class="btn btn-success">Create Karyawan</a>
+                                </div>
+                                <div class="card-body">
+                                    <div class="table-responsive">
+                                        <table class="table">
+                                            <thead>
+                                                <tr>
+                                                    <td>No</td>
+                                                    <td>Nama</td>
+                                                    <td>Email</td>
+                                                    <td style="width: 20%;">Aksi</td>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                @forelse ($karyawan as $item)
+                                                    <tr>
+                                                        <td>{{ $loop->iteration }}</td>
+                                                        <td>{{ $item->name }}</td>
+                                                        <td>{{ $item->email }}</td>
+                                                        <td>
+                                                            <a href="{{ route('karyawan.edit', $item->id) }}" class="btn btn-primary mb-1">Edit</a>
+                                                            <form action="{{ route('karyawan.destroy', $item->id) }}'" method="POST">
+                                                                @method('DELETE')
+                                                                @csrf
+                                                                <button type="submit" class="btn btn-danger">
+                                                                    Delete
+                                                                </button>
+                                                            </form>
+                                                        </td>
+                                                    </tr>
+                                                @empty
+                                                    <tr>
+                                                        <td colspan="4">No Data.</td>
+                                                    </tr>
+                                                @endforelse
+                                            </tbody>
+                                        </table>
+                                        {{ $karyawan->links() }}
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-6">
+                            <div class="card">
+                                <div class="card-header">
+                                    <a href="{{ route('h_karyawan.create') }}" class="btn btn-success">Create Hierarchy</a>
+                                </div>
+                                <div class="card-body">
+                                    <div class="table-responsive">
+                                        <table class="table">
+                                            <thead>
+                                                <tr>
+                                                    <td>No</td>
+                                                    <td>Karyawan</td>
+                                                    <td>Manager</td>
+                                                    <td style="width: 20%;">Aksi</td>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                @forelse ($h_karyawan as $item)
+                                                    <tr>
+                                                        <td>{{ $loop->iteration }}</td>
+                                                        <td>{{ $item->karyawan->name }}</td>
+                                                        <td>{{ $item->manager->name }}</td>
+                                                        <td>
+                                                            <a href="{{ route('karyawan.edit', $item->id) }}" class="btn btn-primary mb-1">Edit</a>
+                                                            <form action="{{ route('karyawan.destroy', $item->id) }}'" method="POST">
+                                                                @method('DELETE')
+                                                                @csrf
+                                                                <button type="submit" class="btn btn-danger">
+                                                                    Delete
+                                                                </button>
+                                                            </form>
+                                                        </td>
+                                                    </tr>
+                                                @empty
+                                                    <tr>
+                                                        <td colspan="4">No Data.</td>
+                                                    </tr>
+                                                @endforelse
+                                            </tbody>
+                                        </table>
+                                        {{ $karyawan->links() }}
+                                    </div>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>

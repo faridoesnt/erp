@@ -3,6 +3,7 @@
 namespace App\Http\Repository\Karyawan;
 
 use App\Models\User;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use App\Http\Repository\Karyawan\KaryawanRepositoryInterface;
 
@@ -18,6 +19,11 @@ class KaryawanRepository implements KaryawanRepositoryInterface
     public function getAll()
     {
         return $this->user->where('roles', 'Karyawan')->paginate(10);
+    }
+
+    public function getID()
+    {
+        return $this->user->where('roles', 'Karyawan')->where('id', Auth::user()->id)->first();
     }
 
     public function save($data)

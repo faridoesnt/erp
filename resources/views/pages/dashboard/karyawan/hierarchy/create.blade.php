@@ -12,12 +12,12 @@
             <div class="container-fluid">
                 <div class="row mb-2">
                 <div class="col-sm-6">
-                    <h1 class="m-0">Edit Hierarchy</h1>
+                    <h1 class="m-0">Create Hierarchy Karyawan</h1>
                 </div><!-- /.col -->
                 <div class="col-sm-6">
                     <ol class="breadcrumb float-sm-right">
-                    <li class="breadcrumb-item">Hierarchy</li>
-                    <li class="breadcrumb-item active">Karyawan - Manager</li>
+                    <li class="breadcrumb-item">Master Data</li>
+                    <li class="breadcrumb-item active">Karyawan</li>
                     </ol>
                 </div><!-- /.col -->
                 </div><!-- /.row -->
@@ -28,8 +28,7 @@
         <!-- Main content -->
         <section class="content">
             <div class="container-fluid">
-                <form action="{{ route('hierarchy_karyawan.update', $data->id) }}" method="POST" enctype="multipart/form-data">
-                    @method('PUT')
+                <form action="{{ route('h_karyawan.store') }}" method="POST" enctype="multipart/form-data">
                     @csrf
                     <div class="card">
                         @if($errors->any())
@@ -43,20 +42,24 @@
                         @endif
                         <div class="card-body">
                             <div class="form-group">
-                                <label for="">Karyawan</label>
+                                <label>Karyawan</label>
                                 <select name="karyawan_id" class="form-control">
-                                    <option value="{{ $data->karyawan_id }}">{{ $data->karyawan->name }}</option>
+                                    @foreach ($karyawan as $item)
+                                        <option value="{{ $item->id }}">{{ $item->name }}</option>
+                                    @endforeach
                                 </select>
                             </div>
                             <div class="form-group">
-                                <label for="">Manager</label>
+                                <label>Manager</label>
                                 <select name="manager_id" class="form-control">
-                                    <option value="{{ $data->manager_id }}">{{ $data->manager->name }}</option>
+                                    @foreach ($manager as $item)
+                                        <option value="{{ $item->id }}">{{ $item->name }}</option>
+                                    @endforeach
                                 </select>
                             </div>
                             <div class="form-group float-right">
-                                <a href="{{ route('hierarchy_karyawan.index') }}" class="btn btn-primary">Back</a>
-                                <button type="submit" class="btn btn-success">Save</button>
+                                <a href="{{ route('karyawan.index') }}" class="btn btn-primary">Back</a>
+                                <button type="submit" class="btn btn-success">Create</button>
                             </div>
                         </div>
                     </div>
