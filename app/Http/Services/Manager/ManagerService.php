@@ -18,6 +18,11 @@ class ManagerService
         return $this->managerRepository->getAll();
     }
 
+    public function getCreateEdit()
+    {
+        return $this->managerRepository->getCreateEdit();
+    }
+
     public function saveData($request)
     {
         return $this->managerRepository->save($request);

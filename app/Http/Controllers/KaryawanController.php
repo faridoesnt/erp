@@ -40,7 +40,7 @@ class KaryawanController extends Controller
 
     public function h_create()
     {
-        $karyawan = $this->karyawanService->getAll();
+        $karyawan = $this->karyawanService->getCreateEdit();
         $manager = $this->managerService->getAll();
 
         return view('pages.dashboard.karyawan.hierarchy.create', [
@@ -86,6 +86,19 @@ class KaryawanController extends Controller
         ]);
     }
 
+    public function h_edit($id)
+    {
+        $hierarchy = $this->h_karyawanService->editData($id);
+        $karyawan = $this->karyawanService->getCreateEdit();
+        $manager = $this->managerService->getCreateEdit();
+
+        return view('pages.dashboard.karyawan.hierarchy.edit', [
+            'hierarchy' => $hierarchy,
+            'karyawan' => $karyawan,
+            'manager' => $manager,
+        ]);
+    }
+
     public function update(UserRequest $request, $id)
     {
         try
@@ -100,11 +113,39 @@ class KaryawanController extends Controller
         }
     }
 
+    public function h_update(Request $request, $id)
+    {
+        try
+        {
+            $this->h_karyawanService->updateData($request, $id);
+
+            return redirect()->route('karyawan.index')->with('success', 'Successfully Update Data');
+        }
+        catch (Throwable $e)
+        {
+            return $e->getMessage();
+        }
+    }
+
     public function destroy($id)
     {
         try
         {
             $this->karyawanService->delete($id);
+
+            return redirect()->route('karyawan.index')->with('success', 'Successfully Delete Data');
+        }
+        catch (Throwable $e)
+        {
+            return $e->getMessage();
+        }
+    }
+
+    public function h_destroy($id)
+    {
+        try
+        {
+            $this->h_karyawanService->delete($id);
 
             return redirect()->route('karyawan.index')->with('success', 'Successfully Delete Data');
         }

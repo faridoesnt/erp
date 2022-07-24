@@ -18,7 +18,12 @@ class KaryawanRepository implements KaryawanRepositoryInterface
 
     public function getAll()
     {
-        return $this->user->where('roles', 'Karyawan')->paginate(10);
+        return $this->user->where('roles', 'Karyawan')->paginate(10, ['*'], 'karyawan');
+    }
+
+    public function getCreateEdit()
+    {
+        return $this->user->where('roles', 'Karyawan')->get();;
     }
 
     public function getID()

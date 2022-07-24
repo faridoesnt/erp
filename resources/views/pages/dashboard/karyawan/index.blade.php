@@ -78,7 +78,7 @@
                                                 @endforelse
                                             </tbody>
                                         </table>
-                                        {{ $karyawan->links() }}
+                                        {{ $karyawan->appends(['hierarchy' => $h_karyawan->currentPage()])->links() }}
                                     </div>
                                 </div>
                             </div>
@@ -103,11 +103,11 @@
                                                 @forelse ($h_karyawan as $item)
                                                     <tr>
                                                         <td>{{ $loop->iteration }}</td>
-                                                        <td>{{ $item->karyawan->name }}</td>
-                                                        <td>{{ $item->manager->name }}</td>
+                                                        <td>{{ $item->karyawan->name ?? '-'}}</td>
+                                                        <td>{{ $item->manager->name ?? '-'}}</td>
                                                         <td>
-                                                            <a href="{{ route('karyawan.edit', $item->id) }}" class="btn btn-primary mb-1">Edit</a>
-                                                            <form action="{{ route('karyawan.destroy', $item->id) }}'" method="POST">
+                                                            <a href="{{ route('h_karyawan.edit', $item->id) }}" class="btn btn-primary mb-1">Edit</a>
+                                                            <form action="{{ route('h_karyawan.destroy', $item->id) }}" method="POST">
                                                                 @method('DELETE')
                                                                 @csrf
                                                                 <button type="submit" class="btn btn-danger">
@@ -123,7 +123,7 @@
                                                 @endforelse
                                             </tbody>
                                         </table>
-                                        {{ $karyawan->links() }}
+                                        {{ $h_karyawan->appends(['karyawan' => $karyawan->currentPage()])->links() }}
                                     </div>
                                 </div>
                             </div>

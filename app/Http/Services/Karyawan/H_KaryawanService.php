@@ -32,4 +32,24 @@ class H_KaryawanService
 
         return $this->h_karyawanRepository->save($data);
     }
+
+    public function editData($id)
+    {
+        return $this->h_karyawanRepository->edit($id);
+    }
+
+    public function updateData($request, $id)
+    {
+        $data = $request->validate([
+            'karyawan_id'   => 'required',
+            'manager_id'   => 'required',
+        ]);
+
+        return $this->h_karyawanRepository->update($data, $id);
+    }
+
+    public function delete($id)
+    {
+        return $this->h_karyawanRepository->destroy($id);
+    }
 }

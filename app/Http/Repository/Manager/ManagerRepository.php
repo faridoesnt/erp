@@ -21,6 +21,11 @@ class ManagerRepository implements ManagerRepositoryInterface
         return $this->user->where('roles', 'Manager')->paginate(10);
     }
 
+    public function getCreateEdit()
+    {
+        return $this->user->where('roles', 'Manager')->get();
+    }
+
     public function getID()
     {
         return $this->user->where('roles', 'Manager')->where('id', Auth::user()->id)->first();

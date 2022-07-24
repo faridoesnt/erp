@@ -15,7 +15,7 @@ class H_KaryawanRepository implements H_KaryawanRepositoryInterface
 
     public function getAll()
     {
-        return $this->hierarchy->with(['karyawan', 'manager'])->paginate(10);
+        return $this->hierarchy->with(['karyawan', 'manager'])->paginate(10, ['*'], 'hierarchy');
     }
 
     public function getManager()
@@ -33,6 +33,34 @@ class H_KaryawanRepository implements H_KaryawanRepositoryInterface
         $hierarchy->manager_id = $data['manager_id'];
 
         $hierarchy->save();
+
+        return $hierarchy;
+    }
+
+    public function edit($id)
+    {
+        $hierarchy = $this->hierarchy->findOrfail($id);
+
+        return $hierarchy;
+    }
+
+    public function update($data, $id)
+    {
+        $hierarchy = $this->hierarchy->findOrfail($id);
+
+        $hierarchy->update([
+            'karyawan_id'   => $data['karyawan_id'],
+            'manager_id'    => $data['manager_id'],
+        ]);
+
+        return $hierarchy;
+    }
+
+    public function destroy($id)
+    {
+        $hierarchy = $this->hierarchy->findOrfail($id);
+
+        $hierarchy->delete();
 
         return $hierarchy;
     }

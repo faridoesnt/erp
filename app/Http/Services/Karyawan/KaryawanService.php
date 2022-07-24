@@ -18,6 +18,11 @@ class KaryawanService
         return $this->karyawanRepository->getAll();
     }
 
+    public function getCreateEdit()
+    {
+        return $this->karyawanRepository->getCreateEdit();
+    }
+
     public function saveData($request)
     {
         return $this->karyawanRepository->save($request);
