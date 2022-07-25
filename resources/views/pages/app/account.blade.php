@@ -63,7 +63,7 @@
                             </div>
                             <div class="card-body">
                                 <div class="form-group">
-                                    {{ $account->manager->name }}
+                                    {{ $account->manager->name ?? ''}}
                                 </div>
                             </div>
                         </div>
@@ -76,7 +76,7 @@
                             <div class="card-body">
                                 @foreach ($account['karyawan'] as $item)
                                     <div class="form-group">
-                                        {{ $loop->iteration }}. {{ $item->karyawan->name }}
+                                        {{ $loop->iteration }}. {{ $item->karyawan->name ?? ''}}
                                     </div>
                                 @endforeach
                             </div>
@@ -90,7 +90,7 @@
                             <div class="card-body">
                                 @foreach ($account['manager'] as $item)
                                     <div class="form-group">
-                                        {{ $loop->iteration }}. {{ $item->manager->name }}
+                                        {{ $loop->iteration }}. {{ $item->manager->name ?? ''}}
                                     </div>
                                 @endforeach
                             </div>
@@ -104,11 +104,9 @@
                                 Your Supervisor
                             </div>
                             <div class="card-body">
-                                @foreach ($account['supervisor'] as $item)
-                                    <div class="form-group">
-                                        {{ $item->supervisor->name ?? ''}}
-                                    </div>
-                                @endforeach
+                                <div class="form-group">
+                                    {{ $account['supervisor']->supervisor->name ?? ''}}
+                                </div>
                             </div>
                         </div>
                     @endcan

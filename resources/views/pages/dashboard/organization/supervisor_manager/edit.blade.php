@@ -12,12 +12,12 @@
             <div class="container-fluid">
                 <div class="row mb-2">
                 <div class="col-sm-6">
-                    <h1 class="m-0">Edit Hierarchy Manager</h1>
+                    <h1 class="m-0">Edit Organization</h1>
                 </div><!-- /.col -->
                 <div class="col-sm-6">
                     <ol class="breadcrumb float-sm-right">
-                    <li class="breadcrumb-item">Master Data</li>
-                    <li class="breadcrumb-item active">Manager</li>
+                    <li class="breadcrumb-item">Organization</li>
+                    <li class="breadcrumb-item active">Supervisor - Manager</li>
                     </ol>
                 </div><!-- /.col -->
                 </div><!-- /.row -->
@@ -28,7 +28,7 @@
         <!-- Main content -->
         <section class="content">
             <div class="container-fluid">
-                <form action="{{ route('h_manager.update', $hierarchy->id) }}" method="POST" enctype="multipart/form-data">
+                <form action="{{ route('organization-supervisor-manager.update', $supervisor_manager->id) }}" method="POST" enctype="multipart/form-data">
                     @method('PUT')
                     @csrf
                     <div class="card">
@@ -43,24 +43,24 @@
                         @endif
                         <div class="card-body">
                             <div class="form-group">
-                                <label>Manager</label>
-                                <select name="manager_id" class="form-control">
-                                    @foreach ($manager as $item)
-                                        <option value="{{ $item->id }}" {{ ($hierarchy->manager_id == $item->id) ? 'selected' : '' }}>{{ $item->name }}</option>
+                                <label>Supervisor</label>
+                                <select name="supervisor_id" class="form-control" required>
+                                    @foreach ($data['supervisor'] as $item)
+                                        <option value="{{ $item->id }}" {{ ($item->id == $supervisor_manager->supervisor_id) ? 'selected' : '' }}>{{ $item->name }}</option>
                                     @endforeach
                                 </select>
                             </div>
                             <div class="form-group">
-                                <label>Supervisor</label>
-                                <select name="supervisor_id" class="form-control">
-                                    @foreach ($supervisor as $item)
-                                        <option value="{{ $item->id }}" {{ ($hierarchy->supervisor_id == $item->id) ? 'selected' : '' }}>{{ $item->name }}</option>
+                                <label>Manager</label>
+                                <select name="manager_id" class="form-control" required>
+                                    @foreach ($data['manager'] as $item)
+                                        <option value="{{ $item->id }}" {{ ($item->id == $supervisor_manager->manager_id) ? 'selected' : '' }}>{{ $item->name }}</option>
                                     @endforeach
                                 </select>
                             </div>
                             <div class="form-group float-right">
-                                <a href="{{ route('manager.index') }}" class="btn btn-primary">Back</a>
-                                <button type="submit" class="btn btn-success">Create</button>
+                                <a href="{{ route('organization-supervisor-manager.index') }}" class="btn btn-primary">Back</a>
+                                <button type="submit" class="btn btn-success">Save</button>
                             </div>
                         </div>
                     </div>

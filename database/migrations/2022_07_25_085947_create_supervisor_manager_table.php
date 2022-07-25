@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateHierarchyKaryawanTable extends Migration
+class CreateSupervisorManagerTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,11 +13,10 @@ class CreateHierarchyKaryawanTable extends Migration
      */
     public function up()
     {
-        Schema::create('hierarchy_karyawan', function (Blueprint $table) {
+        Schema::create('supervisor_manager', function (Blueprint $table) {
             $table->id();
-            $table->integer('karyawan_id')->nullable();
-            $table->integer('manager_id')->nullable();
-            $table->integer('supervisor_id')->nullable();
+            $table->integer('supervisor_id');
+            $table->integer('manager_id');
             $table->timestamps();
         });
     }
@@ -29,6 +28,6 @@ class CreateHierarchyKaryawanTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('hierarchy_karyawan');
+        Schema::dropIfExists('supervisor_manager');
     }
 }

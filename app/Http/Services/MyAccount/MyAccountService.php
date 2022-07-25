@@ -4,10 +4,9 @@ namespace App\Http\Services\MyAccount;
 
 use App\Http\Repository\Manager\ManagerRepository;
 use App\Http\Repository\Karyawan\KaryawanRepository;
-use App\Http\Repository\Manager\H_ManagerRepository;
-use App\Http\Repository\Karyawan\H_KaryawanRepository;
 use App\Http\Repository\Supervisor\SupervisorRepository;
-use App\Http\Repository\Supervisor\H_SupervisorRepository;
+use App\Http\Repository\ManagerKaryawan\ManagerKaryawanRepository;
+use App\Http\Repository\SupervisorManager\SupervisorManagerRepository;
 
 class MyAccountService
 {
@@ -17,22 +16,22 @@ class MyAccountService
     protected $h_KaryawanRepository;
     protected $h_managerRepository;
     protected $h_supervisorRepository;
+    protected $managerKaryawanRepository;
+    protected $supervisorManagerRepository;
 
     public function __construct(
             KaryawanRepository $karyawanRepository,
             ManagerRepository $managerRepository,
             SupervisorRepository $supervisorRepository,
-            H_KaryawanRepository $h_KaryawanRepository,
-            H_ManagerRepository $h_managerRepository,
-            H_SupervisorRepository $h_supervisorRepository
+            ManagerKaryawanRepository $managerKaryawanRepository,
+            SupervisorManagerRepository $supervisorManagerRepository
         )
     {
         $this->karyawanRepository = $karyawanRepository;
         $this->managerRepository = $managerRepository;
         $this->supervisorRepository = $supervisorRepository;
-        $this->h_KaryawanRepository = $h_KaryawanRepository;
-        $this->h_managerRepository = $h_managerRepository;
-        $this->h_supervisorRepository = $h_supervisorRepository;
+        $this->managerKaryawanRepository = $managerKaryawanRepository;
+        $this->supervisorManagerRepository = $supervisorManagerRepository;
     }
 
     public function myAccount()
@@ -43,13 +42,12 @@ class MyAccountService
 
         if($karyawan)
         {
-            return $this->h_KaryawanRepository->getManager();
+            return $this->managerKaryawanRepository->getManager($karyawan->id);
         }
         elseif($manager)
         {
-            $manager = $this->managerRepository->getID();
-            $karyawan = $this->h_managerRepository->getKaryawan();
-            $supervisor = $this->h_managerRepository->getSupervisor();
+            $karyawan = $this->managerKaryawanRepository->getKaryawan($manager->id);
+            $supervisor = $this->supervisorManagerRepository->getSupervisor($manager->id);
 
             $data['manager'] = $manager;
             $data['karyawan'] = $karyawan;
@@ -59,8 +57,7 @@ class MyAccountService
         }
         elseif($supervisor)
         {
-            $supervisor = $this->supervisorRepository->getID();
-            $manager = $this->h_supervisorRepository->getManager();
+            $manager = $this->supervisorManagerRepository->getManager($supervisor->id);
 
             $data['manager'] = $manager;
             $data['supervisor'] = $supervisor;

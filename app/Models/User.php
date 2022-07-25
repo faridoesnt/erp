@@ -43,21 +43,21 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
     ];
 
-    public function karyawan()
-    {
-        return $this->hasMany(Hierarchy::class, 'karyawan_id', 'id')
-                    ->where('roles', 'Karyawan');
-    }
+    // public function karyawan()
+    // {
+    //     return $this->hasMany(Hierarchy::class, 'karyawan_id', 'id')
+    //                 ->where('roles', 'Karyawan');
+    // }
     
-    public function manager()
-    {
-        return $this->hasMany(Hierarchy::class, 'manager_id', 'id')
-                    ->where('roles', 'Manager');;
-    }
+    // public function manager()
+    // {
+    //     return $this->hasMany(Hierarchy::class, 'manager_id', 'id')
+    //                 ->where('roles', 'Manager');;
+    // }
 
-    public function supervisor()
-    {
-        return $this->hasMany(Hierarchy::class, 'supervisor_id', 'id')
-                    ->where('roles', 'Supervisor');
-    }
+    // public function supervisor()
+    // {
+    //     return $this->hasMany(Hierarchy::class, 'supervisor_id', 'id')
+    //                 ->where('roles', 'Supervisor');
+    // }
 }
