@@ -19,11 +19,18 @@ class H_ManagerRepository implements H_ManagerRepositoryInterface
         return $this->hierarchy->with(['manager', 'supervisor'])->paginate(10, ['*'], 'hierarchy');
     }
 
-    public function getSupervisor()
+    public function getKaryawan()
     {
-        $manager = $this->hierarchy->with(['manager', 'supervisor'])->where('manager_id', Auth::user()->id)->first();
+        $manager = $this->hierarchy->with(['karyawan', 'manager'])->where('manager_id', Auth::user()->id)->get();
 
         return $manager;
+    }
+
+    public function getSupervisor()
+    {
+        $supervisor = $this->hierarchy->with(['supervisor', 'manager'])->where('manager_id', Auth::user()->id)->get();
+
+        return $supervisor;
     }
 
     public function save($data)
