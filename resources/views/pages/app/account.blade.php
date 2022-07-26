@@ -17,7 +17,7 @@
                             <div class="form-group">
                                 <label>Name :</label>
                                 @can('karyawan')
-                                    <input type="text" class="form-control" value={{ $account->karyawan->name }} disabled>
+                                    <input type="text" class="form-control" value={{ $account['karyawan']->name }} disabled>
                                 @endcan
                                 @can('manager')
                                     <input type="text" class="form-control" value={{ $account['manager']->name }} disabled>
@@ -29,7 +29,7 @@
                             <div class="form-group">
                                 <label>Email :</label>
                                 @can('karyawan')
-                                    <input type="text" class="form-control" value={{ $account->karyawan->email }} disabled>
+                                    <input type="text" class="form-control" value={{ $account['karyawan']->email }} disabled>
                                 @endcan
                                 @can('manager')
                                     <input type="text" class="form-control" value={{ $account['manager']->email }} disabled>
@@ -41,7 +41,7 @@
                             <div class="form-group">
                                 <label>Position :</label>
                                 @can('karyawan')
-                                    <input type="text" class="form-control" value={{ $account->karyawan->roles }} disabled>
+                                    <input type="text" class="form-control" value={{ $account['karyawan']->roles }} disabled>
                                 @endcan
                                 @can('manager')
                                     <input type="text" class="form-control" value={{ $account['manager']->roles }} disabled>
@@ -62,9 +62,11 @@
                                 Your Manager
                             </div>
                             <div class="card-body">
-                                <div class="form-group">
-                                    {{ $account->manager->name ?? ''}}
-                                </div>
+                                @foreach ($account['manager'] as $item)
+                                    <div class="form-group">
+                                        {{ $loop->iteration }}. {{ $item->manager->name ?? ''}}
+                                    </div>
+                                @endforeach
                             </div>
                         </div>
                     @endcan
@@ -104,9 +106,11 @@
                                 Your Supervisor
                             </div>
                             <div class="card-body">
-                                <div class="form-group">
-                                    {{ $account['supervisor']->supervisor->name ?? ''}}
-                                </div>
+                                @foreach ($account['supervisor'] as $item)
+                                    <div class="form-group">
+                                        {{ $loop->iteration }}. {{ $item->supervisor->name ?? ''}}
+                                    </div>
+                                @endforeach
                             </div>
                         </div>
                     @endcan

@@ -2,20 +2,49 @@
 
 namespace App\Http\Services\SupervisorManager;
 
+use App\Http\Repository\Manager\ManagerRepository;
+use App\Http\Repository\Supervisor\SupervisorRepository;
 use App\Http\Repository\SupervisorManager\SupervisorManagerRepository;
 
 class SupervisorManagerService
 {
     protected $supervisorManagerRepository;
+    protected $supervisorRepository;
+    protected $managerRepository;
 
-    public function __construct(SupervisorManagerRepository $supervisorManagerRepository)
+    public function __construct(SupervisorManagerRepository $supervisorManagerRepository, SupervisorRepository $supervisorRepository, ManagerRepository $managerRepository)
     {
         $this->supervisorManagerRepository = $supervisorManagerRepository;
+        $this->supervisorRepository = $supervisorRepository;
+        $this->managerRepository = $managerRepository;
     }
 
-    public function getAll()
+    public function getSupervisor()
     {
-        return $this->supervisorManagerRepository->getAll();
+        $manager = $this->managerRepository->getCreateEdit();
+
+        $arr = [];
+
+        foreach($manager as $value) {
+
+            $arr[] = $this->supervisorManagerRepository->getSupervisor($value->id);
+        }
+
+        return $arr;
+    }
+
+    public function getManager()
+    {
+        $supervisor = $this->supervisorRepository->getCreateEdit();
+
+        $arr = [];
+
+        foreach($supervisor as $value) {
+
+            $arr[] = $this->supervisorManagerRepository->getManager($value->id);
+        }
+
+        return $arr;
     }
 
     public function create()
@@ -26,16 +55,6 @@ class SupervisorManagerService
     public function saveData($request)
     {
         return $this->supervisorManagerRepository->save($request);
-    }
-
-    public function edit($id)
-    {
-        return $this->supervisorManagerRepository->edit($id);
-    }
-
-    public function update($request, $id)
-    {
-        return $this->supervisorManagerRepository->update($request, $id);
     }
 
     public function delete($id)

@@ -5,26 +5,55 @@ namespace App\Http\Controllers;
 use Throwable;
 use Illuminate\Http\Request;
 use App\Http\Requests\UserRequest;
+use App\Http\Requests\ManagerKaryawanRequest;
 use App\Http\Services\Manager\ManagerService;
-use App\Http\Services\Supervisor\SupervisorService;
+use App\Http\Requests\SupervisorManagerRequest;
+use App\Http\Services\ManagerKaryawan\ManagerKaryawanService;
+use App\Http\Services\SupervisorManager\SupervisorManagerService;
 
 class ManagerController extends Controller
 {
     protected $managerService;
-    protected $supervisorService;
+    protected $managerKaryawanService;
+    protected $supervisorManagerService;
 
-    public function __construct(ManagerService $managerService, SupervisorService $supervisorService)
+    public function __construct(ManagerService $managerService, ManagerKaryawanService $managerKaryawanService, SupervisorManagerService $supervisorManagerService)
     {
         $this->managerService = $managerService;
-        $this->supervisorService = $supervisorService;
+        $this->managerKaryawanService = $managerKaryawanService;
+        $this->supervisorManagerService = $supervisorManagerService;
     }
 
     public function index()
     {
         $manager = $this->managerService->getAll();
+        $karyawan = $this->managerKaryawanService->getKaryawan();
+        $supervisor = $this->supervisorManagerService->getSupervisor();
 
         return view('pages.dashboard.manager.index', [
             'manager' => $manager,
+            'karyawan' => $karyawan,
+            'supervisor' => $supervisor,
+        ]);
+    }
+
+    public function set_karyawan($id)
+    {
+        $data = $this->managerKaryawanService->create();
+
+        return view('pages.dashboard.manager.setkaryawan', [
+            'id' => $id,
+            'data' => $data
+        ]);
+    }
+
+    public function set_supervisor($id)
+    {
+        $data = $this->supervisorManagerService->create();
+
+        return view('pages.dashboard.manager.setsupervisor', [
+            'id' => $id,
+            'data' => $data
         ]);
     }
 
@@ -44,6 +73,34 @@ class ManagerController extends Controller
         catch (Throwable $e)
         {
             return $e->getMessage();
+        }
+    }
+
+    public function store_karyawan(ManagerKaryawanRequest $request)
+    {
+        try
+        {
+            $this->managerKaryawanService->saveData($request);
+
+            return redirect()->route('manager.index')->with('success', 'Successfully Add New Data');
+        } 
+        catch (\Throwable $th)
+        {
+            throw $th;
+        }
+    }
+
+    public function store_supervisor(SupervisorManagerRequest $request)
+    {
+        try
+        {
+            $this->supervisorManagerService->saveData($request);
+
+            return redirect()->route('manager.index')->with('success', 'Successfully Add New Data');
+        } 
+        catch (\Throwable $th)
+        {
+            throw $th;
         }
     }
 

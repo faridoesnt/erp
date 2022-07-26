@@ -16,11 +16,6 @@ class SupervisorManagerRepository implements SupervisorManagerRepositoryInterfac
         $this->user = $user;
     }
 
-    public function getAll()
-    {
-        return $this->supervisor_manager->with(['supervisor', 'manager'])->paginate(10);
-    }
-
     public function getManager($id)
     {
         return $this->supervisor_manager->with(['manager'])->where('supervisor_id', $id)->get();
@@ -28,7 +23,7 @@ class SupervisorManagerRepository implements SupervisorManagerRepositoryInterfac
 
     public function getSupervisor($id)
     {
-        return $this->supervisor_manager->with(['supervisor'])->where('manager_id', $id)->first();
+        return $this->supervisor_manager->with(['supervisor'])->where('manager_id', $id)->get();
     }
 
     public function create()
@@ -50,25 +45,6 @@ class SupervisorManagerRepository implements SupervisorManagerRepositoryInterfac
         $supervisor_manager->manager_id = $request->manager_id;
 
         $supervisor_manager->save();
-
-        return $supervisor_manager;
-    }
-
-    public function edit($id)
-    {
-        $supervisor_manager = $this->supervisor_manager->findOrfail($id);
-
-        return $supervisor_manager;
-    }
-
-    public function update($request, $id)
-    {
-        $supervisor_manager = $this->supervisor_manager->findOrfail($id);
-
-        $supervisor_manager->update([
-            'supervisor_id' => $request->supervisor_id,
-            'manager_id' => $request->manager_id,
-        ]);
 
         return $supervisor_manager;
     }

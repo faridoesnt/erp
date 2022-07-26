@@ -48,6 +48,8 @@
                                         <td>No</td>
                                         <td>Nama</td>
                                         <td>Email</td>
+                                        <td>Karyawan</td>
+                                        <td>Supervisor</td>
                                         <td style="width: 20%;">Aksi</td>
                                     </tr>
                                 </thead>
@@ -58,6 +60,40 @@
                                             <td>{{ $item->name }}</td>
                                             <td>{{ $item->email }}</td>
                                             <td>
+                                                @foreach ($karyawan as $value)
+                                                    @foreach ($value as $i)
+                                                        @if ($item->id == $i->manager_id)
+                                                            <ul>
+                                                                <li>
+                                                                    {{ $i->karyawan->name }}
+                                                                    <form action="{{ route('delete_karyawan_manager', $i->id) }}" method="POST">
+                                                                        @method('DELETE')
+                                                                        @csrf
+                                                                        <button type="submit" class="btn btn-warning">Delete</button>
+                                                                    </form>
+                                                                </li>
+                                                            </ul>
+                                                        @endif
+                                                    @endforeach
+                                                @endforeach
+                                            </td>
+                                            <td>
+                                                @foreach ($supervisor as $value)
+                                                    @foreach ($value as $i)
+                                                        @if ($item->id == $i->manager_id)
+                                                            {{ $i->supervisor->name }}
+                                                            <form action="{{ route('delete_manager_supervisor', $i->id) }}" method="POST">
+                                                                @method('DELETE')
+                                                                @csrf
+                                                                <button type="submit" class="btn btn-warning">Delete</button>
+                                                            </form>
+                                                        @endif
+                                                    @endforeach
+                                                @endforeach
+                                            </td>
+                                            <td>
+                                                <a href="{{ route('setSupervisor', $item->id) }}" class="btn btn-info mb-1">Set Supervisor</a>
+                                                <a href="{{ route('setKaryawan', $item->id) }}" class="btn btn-secondary mb-1">Set Karyawan</a>
                                                 <a href="{{ route('manager.edit', $item->id) }}" class="btn btn-primary mb-1">Edit</a>
                                                 <form action="{{ route('manager.destroy', $item->id) }}'" method="POST">
                                                     @method('DELETE')

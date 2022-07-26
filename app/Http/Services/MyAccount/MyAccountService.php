@@ -42,7 +42,12 @@ class MyAccountService
 
         if($karyawan)
         {
-            return $this->managerKaryawanRepository->getManager($karyawan->id);
+            $manager = $this->managerKaryawanRepository->getManager($karyawan->id);
+
+            $data['karyawan'] = $karyawan;
+            $data['manager'] = $manager;
+
+            return $data;
         }
         elseif($manager)
         {

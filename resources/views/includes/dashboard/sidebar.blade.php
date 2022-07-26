@@ -53,7 +53,7 @@
             </p>
           </a>
         </li>
-        <li class="nav-header">Organization</li>
+        {{-- <li class="nav-header">Organization</li>
         <li class="nav-item">
           <a href="{{ route('organization-supervisor-manager.index') }}" class="nav-link {{ (request()->is('dashboard/organization-supervisor-manager*')) ? 'active' : '' }}">
             <i class="nav-icon fas fa-solid fa-user"></i>
@@ -69,7 +69,7 @@
               Manager - Karyawan
             </p>
           </a>
-        </li>
+        </li> --}}
         <li class="nav-header">SETTINGS</li>
         <li class="nav-item">
           <a href="{{ route('logout') }}"

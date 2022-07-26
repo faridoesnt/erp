@@ -16,14 +16,9 @@ class ManagerKaryawanRepository implements ManagerKaryawanRepositoryInterface
         $this->user = $user;
     }
 
-    public function getAll()
-    {
-        return $this->manager_karyawan->with(['manager', 'karyawan'])->paginate(10);
-    }
-
     public function getManager($id)
     {
-        return $this->manager_karyawan->with(['manager'])->where('karyawan_id', $id)->first();
+        return $this->manager_karyawan->with(['manager'])->where('karyawan_id', $id)->get();
     }
 
     public function getKaryawan($id)
@@ -50,25 +45,6 @@ class ManagerKaryawanRepository implements ManagerKaryawanRepositoryInterface
         $manager_karyawan->karyawan_id = $request->karyawan_id;
 
         $manager_karyawan->save();
-
-        return $manager_karyawan;
-    }
-
-    public function edit($id)
-    {
-        $manager_karyawan = $this->manager_karyawan->findOrfail($id);
-
-        return $manager_karyawan;
-    }
-
-    public function update($request, $id)
-    {
-        $manager_karyawan = $this->manager_karyawan->findOrfail($id);
-
-        $manager_karyawan->update([
-            'manager_id' => $request->manager_id,
-            'karyawan_id' => $request->karyawan_id,
-        ]);
 
         return $manager_karyawan;
     }

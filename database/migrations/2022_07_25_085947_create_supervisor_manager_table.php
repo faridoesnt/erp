@@ -15,9 +15,12 @@ class CreateSupervisorManagerTable extends Migration
     {
         Schema::create('supervisor_manager', function (Blueprint $table) {
             $table->id();
-            $table->integer('supervisor_id');
-            $table->integer('manager_id');
+            $table->unsignedBigInteger('supervisor_id');
+            $table->unsignedBigInteger('manager_id');
             $table->timestamps();
+
+            $table->foreign('supervisor_id')->references('id')->on('users')->onDelete('cascade');
+            $table->foreign('manager_id')->references('id')->on('users')->onDelete('cascade');
         });
     }
 

@@ -3,14 +3,17 @@
 namespace App\Http\Services\Manager;
 
 use App\Http\Repository\Manager\ManagerRepository;
+use App\Http\Repository\ManagerKaryawan\ManagerKaryawanRepository;
 
 class ManagerService
 {
     protected $managerRepository;
+    protected $managerKaryawanRepository;
 
-    public function __construct(ManagerRepository $managerRepository)
+    public function __construct(ManagerRepository $managerRepository, ManagerKaryawanRepository $managerKaryawanRepository)
     {
         $this->managerRepository = $managerRepository;
+        $this->managerKaryawanRepository = $managerKaryawanRepository;
     }
 
     public function getAll()

@@ -36,14 +36,22 @@ Route::prefix('dashboard')
             route::get('/', [DashboardController::class, 'index'])->name('dashboard');
 
             route::resource('supervisor', SupervisorController::class);
+            route::get('/supervisor/setmanager/{id}', [SupervisorController::class, 'set_manager']);
+            route::post('/supervisor/setmanager', [SupervisorController::class, 'store_manager']);
 
             route::resource('manager', ManagerController::class);
+            route::get('/manager/setkaryawan/{id}', [ManagerController::class, 'set_karyawan'])->name('setKaryawan');
+            route::post('/manager/setkaryawan', [ManagerController::class, 'store_karyawan'])->name('storeKaryawan');
+            route::get('/manager/setsupervisor/{id}', [ManagerController::class, 'set_supervisor'])->name('setSupervisor');
+            route::post('/manager/setsupervisor', [ManagerController::class, 'store_supervisor'])->name('storeSupervisor');
 
             route::resource('karyawan', KaryawanController::class);
+            route::get('/karyawan/setmanager/{id}', [KaryawanController::class, 'set_manager'])->name('setManager');
+            route::post('/karyawan/setmanager', [KaryawanController::class, 'store_manager'])->name('storeManager');
 
-            route::resource('organization-supervisor-manager', SupervisorManagerController::class);
+            route::delete('organization-supervisor-manager/{id}', [SupervisorManagerController::class, 'destroy'])->name('delete_manager_supervisor');
 
-            route::resource('organization-manager-karyawan', ManagerKaryawanController::class);
+            route::delete('organization-manager-karyawan/{id}', [ManagerKaryawanController::class, 'destroy'])->name('delete_karyawan_manager');
                         
         });
         

@@ -2,25 +2,41 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\SupervisorManagerRequest;
 use Throwable;
 use App\Http\Requests\UserRequest;
 use App\Http\Services\Supervisor\SupervisorService;
+use App\Http\Services\SupervisorManager\SupervisorManagerService;
 
 class SupervisorController extends Controller
 {
     protected $supervisorService;
+    protected $supervisorManagerService;
 
-    public function __construct(SupervisorService $supervisorService)
+    public function __construct(SupervisorService $supervisorService, SupervisorManagerService $supervisorManagerService)
     {
         $this->supervisorService = $supervisorService;
+        $this->supervisorManagerService = $supervisorManagerService;
     }
 
     public function index()
     {
         $supervisor = $this->supervisorService->getAll();
+        $manager = $this->supervisorManagerService->getManager();
 
         return view('pages.dashboard.supervisor.index', [
-            'supervisor' => $supervisor
+            'supervisor' => $supervisor,
+            'manager' => $manager,
+        ]);
+    }
+
+    public function set_manager($id)
+    {
+        $data = $this->supervisorManagerService->create();
+
+        return view('pages.dashboard.supervisor.setmanager', [
+            'id' => $id,
+            'data' => $data
         ]);
     }
 
@@ -40,6 +56,20 @@ class SupervisorController extends Controller
         catch (Throwable $e)
         {
             return $e->getMessage();
+        }
+    }
+
+    public function store_manager(SupervisorManagerRequest $request)
+    {
+        try
+        {
+            $this->supervisorManagerService->saveData($request);
+
+            return redirect()->route('supervisor.index')->with('success', 'Successfully Add New Data');
+        } 
+        catch (\Throwable $th)
+        {
+            throw $th;
         }
     }
 

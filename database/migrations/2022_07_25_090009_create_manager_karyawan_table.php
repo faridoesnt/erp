@@ -15,9 +15,12 @@ class CreateManagerKaryawanTable extends Migration
     {
         Schema::create('manager_karyawan', function (Blueprint $table) {
             $table->id();
-            $table->integer('manager_id');
-            $table->integer('karyawan_id');
+            $table->unsignedBigInteger('manager_id');
+            $table->unsignedBigInteger('karyawan_id');
             $table->timestamps();
+
+            $table->foreign('manager_id')->references('id')->on('users')->onDelete('cascade');
+            $table->foreign('karyawan_id')->references('id')->on('users')->onDelete('cascade');
         });
     }
 
