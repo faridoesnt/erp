@@ -2,6 +2,7 @@
 
 namespace App\Http\Services\MyAccount;
 
+use App\Http\Repository\HR\HrRepository;
 use App\Http\Repository\Manager\ManagerRepository;
 use App\Http\Repository\Karyawan\KaryawanRepository;
 use App\Http\Repository\Supervisor\SupervisorRepository;
@@ -13,18 +14,17 @@ class MyAccountService
     protected $karyawanRepository;
     protected $managerRepository;
     protected $supervisorRepository;
-    protected $h_KaryawanRepository;
-    protected $h_managerRepository;
-    protected $h_supervisorRepository;
     protected $managerKaryawanRepository;
     protected $supervisorManagerRepository;
+    protected $hrRepository;
 
     public function __construct(
             KaryawanRepository $karyawanRepository,
             ManagerRepository $managerRepository,
             SupervisorRepository $supervisorRepository,
             ManagerKaryawanRepository $managerKaryawanRepository,
-            SupervisorManagerRepository $supervisorManagerRepository
+            SupervisorManagerRepository $supervisorManagerRepository,
+            HrRepository $hrRepository
         )
     {
         $this->karyawanRepository = $karyawanRepository;
@@ -32,6 +32,7 @@ class MyAccountService
         $this->supervisorRepository = $supervisorRepository;
         $this->managerKaryawanRepository = $managerKaryawanRepository;
         $this->supervisorManagerRepository = $supervisorManagerRepository;
+        $this->hrRepository = $hrRepository;
     }
 
     public function myAccount()
@@ -39,6 +40,7 @@ class MyAccountService
         $karyawan = $this->karyawanRepository->getID();
         $manager = $this->managerRepository->getID();
         $supervisor = $this->supervisorRepository->getID();
+        $hr = $this->hrRepository->getID();
 
         if($karyawan)
         {
@@ -66,6 +68,12 @@ class MyAccountService
 
             $data['manager'] = $manager;
             $data['supervisor'] = $supervisor;
+
+            return $data;
+        }
+        elseif($hr)
+        {
+            $data['hr'] = $hr;
 
             return $data;
         }

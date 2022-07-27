@@ -16,6 +16,9 @@
                         <div class="card-body">
                             <div class="form-group">
                                 <label>Name :</label>
+                                @can('hr')
+                                    <input type="text" class="form-control" value={{ $account['hr']->name }} disabled>
+                                @endcan
                                 @can('karyawan')
                                     <input type="text" class="form-control" value={{ $account['karyawan']->name }} disabled>
                                 @endcan
@@ -28,6 +31,9 @@
                             </div>
                             <div class="form-group">
                                 <label>Email :</label>
+                                @can('hr')
+                                    <input type="text" class="form-control" value={{ $account['hr']->email }} disabled>
+                                @endcan
                                 @can('karyawan')
                                     <input type="text" class="form-control" value={{ $account['karyawan']->email }} disabled>
                                 @endcan
@@ -40,6 +46,9 @@
                             </div>
                             <div class="form-group">
                                 <label>Position :</label>
+                                @can('hr')
+                                    <input type="text" class="form-control" value={{ $account['hr']->roles }} disabled>
+                                @endcan
                                 @can('karyawan')
                                     <input type="text" class="form-control" value={{ $account['karyawan']->roles }} disabled>
                                 @endcan
