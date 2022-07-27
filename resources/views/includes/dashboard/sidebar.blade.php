@@ -14,7 +14,7 @@
             with font-awesome or any other icon font library -->
         <li class="nav-item">
           <a href="{{ route('app') }}" class="nav-link">
-            <i class="nav-icon fas fa-solid fa-book"></i>
+            <i class="nav-icon fas fa-solid fa-house"></i>
             <p>
               Home
             </p>
@@ -23,7 +23,7 @@
         <li class="nav-header">Employees</li>
         <li class="nav-item">
           <a href="{{ route('supervisor.index') }}" class="nav-link {{ (request()->is('dashboard/supervisor*')) ? 'active' : '' }}">
-            <i class="nav-icon fas fa-solid fa-book"></i>
+            <i class="nav-icon fas fa-solid fa-user"></i>
             <p>
               Supervisor
             </p>
@@ -39,7 +39,7 @@
         </li>
         <li class="nav-item">
           <a href="{{ route('karyawan.index') }}" class="nav-link {{ (request()->is('dashboard/karyawan*')) ? 'active' : '' }}">
-            <i class="nav-icon fas fa-users"></i>
+            <i class="nav-icon fas fa-user"></i>
             <p>
               Karyawan
             </p>
