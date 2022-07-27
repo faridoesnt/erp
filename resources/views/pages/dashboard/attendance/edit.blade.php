@@ -12,12 +12,12 @@
             <div class="container-fluid">
                 <div class="row mb-2">
                 <div class="col-sm-6">
-                    <h1 class="m-0">Edit Karyawan</h1>
+                    <h1 class="m-0">Edit Attendance</h1>
                 </div><!-- /.col -->
                 <div class="col-sm-6">
                     <ol class="breadcrumb float-sm-right">
-                    <li class="breadcrumb-item">Employees</li>
-                    <li class="breadcrumb-item active">Karyawan</li>
+                    <li class="breadcrumb-item">Attendance</li>
+                    <li class="breadcrumb-item active">Attendance</li>
                     </ol>
                 </div><!-- /.col -->
                 </div><!-- /.row -->
@@ -28,7 +28,7 @@
         <!-- Main content -->
         <section class="content">
             <div class="container-fluid">
-                <form action="{{ route('karyawan.update', $karyawan->id) }}" method="POST" enctype="multipart/form-data">
+                <form action="{{ route('attendance.update', $attendance->id) }}" method="POST" enctype="multipart/form-data">
                     @method('PUT')
                     @csrf
                     <div class="card">
@@ -43,26 +43,24 @@
                         @endif
                         <div class="card-body">
                             <div class="form-group">
-                                <label for="">Name</label>
-                                <input type="text" name="name" class="form-control" value="{{ $karyawan->name }}" required>
+                                <label>Name</label>
+                                <input type="text" class="form-control" value="{{ $attendance->user->name }}" disabled>
                             </div>
                             <div class="form-group">
-                                <label for="">Email</label>
-                                <input type="email" name="email" class="form-control" value="{{ $karyawan->email }}" required>
+                                <label>Position</label>
+                                <input type="text" class="form-control" value="{{ $attendance->user->roles }}" disabled>
                             </div>
-                            <div class="form-group d-none">
-                                <input id="password" type="password" name="password" class="form-control" value="{{ $karyawan->password }}" required autocomplete="new-password">
+                            <div class="form-group">
+                                <label>Check In</label>
+                                <input type="text" class="form-control" value="{{ $attendance->jam_masuk }}" disabled>
                             </div>
-                            <div class="form-group d-none">
-                                <input id="password-confirm" type="password" name="password_confirmation" class="form-control" value="{{ $karyawan->password }}" required autocomplete="new-password">
-                            </div>
-                            <div class="form-group d-none">
-                                <select name="roles" class="form-control" required>
-                                    <option value="{{ $karyawan->roles }}" selected>{{ $karyawan->roles }}</option>
-                                </select>
+                            <div class="form-group">
+                                <label>Check Out</label>
+                                <input type="text" class="form-control" value="{{ $now }}" disabled>
+                                <input type="hidden" name="jam_keluar" value="{{ $now }}">
                             </div>
                             <div class="form-group float-right">
-                                <a href="{{ route('karyawan.index') }}" class="btn btn-primary">Back</a>
+                                <a href="{{ route('attendance.index') }}" class="btn btn-primary">Back</a>
                                 <button type="submit" class="btn btn-success">Save</button>
                             </div>
                         </div>

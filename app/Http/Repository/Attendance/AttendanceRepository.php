@@ -3,15 +3,17 @@
 namespace App\Http\Repository\Attendance;
 
 use App\Models\Attendance;
-use Illuminate\Support\Facades\Auth;
+use App\Models\User;
 
 class AttendanceRepository implements AttendanceRepositoryInterface
 {
     protected $attendance;
+    protected $user;
 
-    public function __construct(Attendance $attendance)
+    public function __construct(Attendance $attendance, User $user)
     {
         $this->attendance = $attendance;
+        $this->user = $user;
     }
 
     public function getTodayCheckInExists($data)
@@ -63,5 +65,31 @@ class AttendanceRepository implements AttendanceRepositoryInterface
         return $this->attendance->where('user_id', $data['user_id'])
                                 ->orderBy('tanggal', 'asc')
                                 ->paginate(10);
+    }
+
+    public function getAll()
+    {
+        return $this->attendance->with(['user'])->orderBy('tanggal', 'asc')->paginate(10);
+    }
+
+    public function getUserAll()
+    {
+        return $this->user->get();
+    }
+
+    public function getAttendanceID($id)
+    {
+        return $this->attendance->with(['user'])->findOrfail($id);
+    }
+
+    public function updateAttendance($request, $id)
+    {
+        $attendance = $this->attendance->findOrfail($id);
+
+        $attendance->update([
+            'jam_keluar' => $request->jam_keluar,
+        ]);
+
+        return $attendance;
     }
 }

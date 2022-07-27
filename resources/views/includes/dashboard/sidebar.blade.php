@@ -20,7 +20,7 @@
             </p>
           </a>
         </li>
-        <li class="nav-header">MASTER DATA</li>
+        <li class="nav-header">Employees</li>
         <li class="nav-item">
           <a href="{{ route('supervisor.index') }}" class="nav-link {{ (request()->is('dashboard/supervisor*')) ? 'active' : '' }}">
             <i class="nav-icon fas fa-solid fa-book"></i>
@@ -47,10 +47,10 @@
         </li>
         <li class="nav-header">Attendance</li>
         <li class="nav-item">
-          <a href="" class="nav-link">
+          <a href="{{ route('attendance.index') }}" class="nav-link {{ (request()->is('dashboard/attendance*')) ? 'active' : '' }}">
             <i class="nav-icon fas fa-solid fa-arrow-right"></i>
             <p>
-              Attendace
+              Attendance
             </p>
           </a>
         </li>

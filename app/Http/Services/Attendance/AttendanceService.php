@@ -77,4 +77,24 @@ class attendanceService
 
         return $this->attendaceRepository->getList($data);
     }
+
+    public function getAll()
+    {
+        return $this->attendaceRepository->getAll();
+    }
+
+    public function getUserAll()
+    {
+        return $this->attendaceRepository->getUserAll();
+    }
+
+    public function getAttendanceID($id)
+    {
+        return $this->attendaceRepository->getAttendanceID($id);
+    }
+
+    public function updateAttendance($request, $id)
+    {
+        return $this->attendaceRepository->updateAttendance($request, $id);
+    }
 }

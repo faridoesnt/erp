@@ -9,4 +9,8 @@ interface AttendanceRepositoryInterface
     public function checkIn($data);
     public function checkOut($data);
     public function getList($data);
+    public function getAll();
+    public function getUserAll();
+    public function getAttendanceID($id);
+    public function updateAttendance($request, $id);
 }

@@ -16,7 +16,7 @@
                 </div><!-- /.col -->
                 <div class="col-sm-6">
                     <ol class="breadcrumb float-sm-right">
-                    <li class="breadcrumb-item">Master Data</li>
+                    <li class="breadcrumb-item">Employees</li>
                     <li class="breadcrumb-item active">Karyawan</li>
                     </ol>
                 </div><!-- /.col -->

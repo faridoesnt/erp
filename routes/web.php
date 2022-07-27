@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AppController;
+use App\Http\Controllers\AttendanceController;
 use App\Http\Controllers\ManagerController;
 use App\Http\Controllers\KaryawanController;
 use App\Http\Controllers\DashboardController;
@@ -50,6 +51,8 @@ Route::prefix('dashboard')
             route::delete('organization-supervisor-manager/{id}', [SupervisorManagerController::class, 'destroy'])->name('delete_manager_supervisor');
 
             route::delete('organization-manager-karyawan/{id}', [ManagerKaryawanController::class, 'destroy'])->name('delete_karyawan_manager');
+
+            route::resource('attendance', AttendanceController::class);
                         
         });
         
