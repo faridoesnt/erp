@@ -57,4 +57,11 @@ class AttendanceRepository implements AttendanceRepositoryInterface
 
         return $attendance;
     }
+
+    public function getList($data)
+    {
+        return $this->attendance->where('user_id', $data['user_id'])
+                                ->orderBy('tanggal', 'asc')
+                                ->paginate(10);
+    }
 }

@@ -70,4 +70,11 @@ class attendanceService
         
         return $this->attendaceRepository->getTodayCheckInExists($data);
     }
+
+    public function getList()
+    {
+        $data['user_id'] = Auth::user()->id;
+
+        return $this->attendaceRepository->getList($data);
+    }
 }

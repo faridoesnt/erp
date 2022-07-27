@@ -8,4 +8,5 @@ interface AttendanceRepositoryInterface
     public function getTodayCheckInExists($data);
     public function checkIn($data);
     public function checkOut($data);
+    public function getList($data);
 }

@@ -79,4 +79,20 @@ class AppController extends Controller
             return $e->getMessage();
         }
     }
+
+    public function attendance_list()
+    {
+        try 
+        {
+            $list = $this->attendanceService->getList();    
+
+            return view('pages.app.attendance_list', [
+                'list' => $list
+            ]);
+        } 
+        catch (Throwable $e) 
+        {
+            return $e->getMessage();
+        }
+    }
 }

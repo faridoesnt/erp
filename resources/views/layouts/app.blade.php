@@ -13,7 +13,7 @@
 </head>
 <body>
     <!--  Navbar -->
-    @include('includes.navbar')
+    @include('includes.nav')
 
     <!-- Page Content -->
     @yield('content')

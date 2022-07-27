@@ -11,6 +11,9 @@
                 <li class="nav-item">
                     <a href="{{ route('app') }}" class="nav-link">Home</a>
                 </li>
+                <li class="nav-item">
+                    <a href="{{ route('attendanceList') }}" class="nav-link">Attendance List</a>
+                </li>
                 @if (Gate::check('karyawan') || Gate::check('manager') || Gate::check('supervisor'))
                     <li class="nav-item">
                         <a href="{{ route('account') }}" class="nav-link">Profile</a>

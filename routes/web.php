@@ -25,6 +25,7 @@ route::get('/', [AppController::class, 'index'])->middleware('auth')->name('app'
 route::get('/account', [AppController::class, 'my_account'])->middleware('auth')->name('account');
 route::post('/check-in', [AppController::class, 'check_in'])->middleware('auth')->name('checkIn');
 route::post('/check-out', [AppController::class, 'check_out'])->middleware('auth')->name('checkOut');
+route::get('/attendance-list', [AppController::class, 'attendance_list'])->middleware('auth')->name('attendanceList');
 
 Route::prefix('dashboard')
         ->middleware('hr')
