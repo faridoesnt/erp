@@ -9,7 +9,7 @@
         <div class="collapse navbar-collapse" id="navbarResponsive">
             <ul class="navbar-nav mx-auto">
                 <li class="nav-item">
-                    <a href="{{ route('app') }}" class="nav-link">Home</a>
+                    <a href="{{ route('app') }}" class="nav-link">Homes</a>
                 </li>
                 <li class="nav-item">
                     <a href="{{ route('attendanceList') }}" class="nav-link">Attendance List</a>
