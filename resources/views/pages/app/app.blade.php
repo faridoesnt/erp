@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @section('title')
-    Dashboard - ERP System
+    App - ERP System
 @endsection
 
 @section('content')
